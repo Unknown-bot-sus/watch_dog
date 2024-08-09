@@ -7,19 +7,26 @@
 </head>
 <body>
     <div>
-        <form>
+        <!-- <form>
             <input type="text" placeholder="Your message">
             <button type="submit">Send</button>
         </form>
-        <ul></ul>
-    </div>
+        <ul></ul> -->
+        <form id="video-form">
+            <input id="video" type="file" />
+            <button type="submit">Upload</button>
+        </form>
 
- 
+        <!-- Add a section to display the upload status -->
+    <div id="upload-status"></div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"
     integrity="sha512-Xm9qbB6Pu06k3PUwPj785dyTl6oHxgsv9nHp7ej7nCpAqGZT3OZpsELuCYX05DdonFpTlBpXMOxjavIAIUwr0w=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="app.js"></script>
+    <script src="upload.js"></script>
+    <!-- <script src="app.js"></script> -->
+    <!-- <script src="detection.js"></script> -->
 
 </body>
 </html>
