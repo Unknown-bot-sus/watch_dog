@@ -1,4 +1,6 @@
-const videoUpload = (req, res) => {
+import { Request, Response } from "express";
+
+export const videoUpload = (req: Request, res: Response) => {
     if (req.file) {
         res.json({
           message: 'Video uploaded successfully!',
@@ -9,5 +11,3 @@ const videoUpload = (req, res) => {
         });
       }
 }
-
-exports.videoUpload = videoUpload

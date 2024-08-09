@@ -1,5 +1,6 @@
-const multer = require("multer");
-const path = require("path");
+import multer, { FileFilterCallback } from "multer";
+import { Request } from "express"
+import path from "path";
 
 // Set up the storage destination and file naming convention
 const storage = multer.diskStorage({
@@ -11,7 +12,7 @@ const storage = multer.diskStorage({
 });
 
 // Filter for video files (optional but recommended)
-const fileFilter = (req, file, cb) => {
+const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
   const allowedFileTypes = /mp4|avi|mkv|mov/;
   const extname = allowedFileTypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = allowedFileTypes.test(file.mimetype);
@@ -23,12 +24,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-
-const upload = multer({
+export const upload = multer({
   storage,
   fileFilter
 });
-
-module.exports = {
-  upload
-}

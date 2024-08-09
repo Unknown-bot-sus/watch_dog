@@ -1,10 +1,10 @@
-const express = require("express");
-const http = require("http");
-const cors = require("cors");
-const path = require("path");
+import express from "express";
+import http from "http";
+import cors from "cors";
+import path from "path";
 
-const { PORT } = require("./constant");
-const videoUpload = require("./routes/videoUpload")
+import { router as videoUpload } from "./routes/videoUpload";
+import { PORT } from "./constant";
 
 const app = express();
 const server = http.createServer(app);
@@ -20,6 +20,6 @@ app.route("/").get((req, res) => {
 app.use("/upload", videoUpload)
 
 
-server.listen(PORT, () => {
+server.listen(3000, () => {
     console.log(`Server is listening on port ${PORT}`)
 })  
