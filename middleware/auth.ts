@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { JsonWebTokenError, verify } from "jsonwebtoken";
-import { UnAuthenticatedError } from "../errrors";
+import { UnAuthenticatedError } from "../errors";
 import { JWT_SECRET } from "../constant";
 
 export async function auth(req: Request, res: Response, next: NextFunction) {
