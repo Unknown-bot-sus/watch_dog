@@ -1,4 +1,5 @@
 import express from "express";
+import "express-async-errors";
 import http from "http";
 import cors from "cors";
 import path from "path";
@@ -17,8 +18,7 @@ app.route("/").get((req, res) => {
     res.status(200).sendFile(path.join(__dirname, "/public/index.html"))
 })
 
-app.use("/upload", videoUpload)
-
+app.use("/upload", videoUpload);
 
 server.listen(3000, () => {
     console.log(`Server is listening on port ${PORT}`)
