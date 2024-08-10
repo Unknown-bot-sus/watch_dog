@@ -2,6 +2,7 @@ import multer, { FileFilterCallback } from "multer";
 import { Request } from "express"
 import path from "path";
 import { createUniqueId } from "../utils/idCreater";
+import { BadRequestError } from "../errors";
 
 // Set up the storage destination and file naming convention
 const storage = multer.diskStorage({
@@ -20,9 +21,9 @@ const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallb
 
   if (mimetype && extname) {
       return cb(null, true);
-  } else {
-      cb(null, false);
-  }
+  } 
+
+  throw new BadRequestError(`${file.mimetype} file type is not supported`);
 };
 
 export const upload = multer({
