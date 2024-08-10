@@ -1,12 +1,13 @@
 import multer, { FileFilterCallback } from "multer";
 import { Request } from "express"
 import path from "path";
+import { createUniqueId } from "../utils/idCreater";
 
 // Set up the storage destination and file naming convention
 const storage = multer.diskStorage({
   destination: "./videos",
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() * Math.round(Math.random() * 1e3);
+    const uniqueSuffix = createUniqueId();
     cb(null, uniqueSuffix + path.extname(file.originalname));
   },
 });
