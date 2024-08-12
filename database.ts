@@ -7,7 +7,7 @@ export const prisma = new PrismaClient().$extends({
     query: {
         user: {
             async create({ args, query}) {
-                args.data.passwrod = await hashMessage(args.data.passwrod);
+                args.data.password = await hashMessage(args.data.password);
                 return query(args)
             }
         }
