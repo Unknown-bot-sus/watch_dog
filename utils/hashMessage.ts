@@ -9,4 +9,5 @@ export async function hashMessage(secret: string) {
 
 export async function compareHash(message: string, hashedMessage: string) {
     const isMatch = await compare(message, hashedMessage);
+    return isMatch
 }

@@ -5,6 +5,7 @@ import cors from "cors";
 import path from "path";
 
 import { router as videoUpload } from "./routes/videoUpload";
+import { router as authRouter } from "./routes/auth";
 import { PORT } from "./constant";
 import { errorHandler } from "./middleware/errorHandler";
 import { notFound } from "./middleware/notFound";
@@ -14,11 +15,15 @@ const server = http.createServer(app);
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, "public")))
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
 app.route("/").get((req, res) => {
     res.status(200).sendFile(path.join(__dirname, "/public/index.html"))
 })
+
+app.use("/api/v1/auth", authRouter)
 
 app.use("/upload", videoUpload);
 
