@@ -6,6 +6,7 @@ import path from "path";
 
 import { router as videoUpload } from "./routes/videoUpload";
 import { router as authRouter } from "./routes/auth";
+import { router as deviceRouter } from "./routes/device";
 import { PORT } from "./constant";
 import { errorHandler } from "./middleware/errorHandler";
 import { notFound } from "./middleware/notFound";
@@ -23,8 +24,8 @@ app.route("/").get((req, res) => {
     res.status(200).sendFile(path.join(__dirname, "/public/index.html"))
 })
 
-app.use("/api/v1/auth", authRouter)
-
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/device", deviceRouter);
 app.use("/upload", videoUpload);
 
 app.use(notFound);
