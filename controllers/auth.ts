@@ -38,5 +38,9 @@ export const signUp = async (req: Request, res: Response) => {
         data: req.body
     });
 
-    res.status(StatusCodes.CREATED).send("User created successfully")
+    const {password, ...userJson} = user;
+
+    res.status(StatusCodes.CREATED).send({
+        user: userJson
+    })
 }
