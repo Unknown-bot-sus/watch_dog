@@ -4,7 +4,6 @@ import http from "http";
 import cors from "cors";
 import path from "path";
 
-import { router as videoUpload } from "./routes/videoUpload";
 import { router as authRouter } from "./routes/auth";
 import { router as deviceRouter } from "./routes/device";
 import { PORT } from "./constant";
@@ -26,7 +25,6 @@ app.route("/").get((req, res) => {
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/device", deviceRouter);
-app.use("/upload", videoUpload);
 
 app.use(notFound);
 app.use(errorHandler);
