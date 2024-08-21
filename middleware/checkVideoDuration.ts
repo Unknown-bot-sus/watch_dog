@@ -8,7 +8,7 @@ export const checkVideoDuration = (duration: number) => async (req: Request, res
         const videoDuration = await getVideoDurationInSeconds(req.file.path);
         if (videoDuration > duration) {
           await unlink(req.file.path);
-          throw new BadRequestError("Video length must be less than 20seconds");
+          throw new BadRequestError(`Video length must be less than ${duration} seconds`);
         }
     } else {
         throw new BadRequestError('Failed to upload video');
