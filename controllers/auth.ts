@@ -9,15 +9,11 @@ export const login = async (req: Request, res: Response) => {
         throw new BadRequestError("Email and password must be provided");
     }
 
-    const user = await prisma.user.findFirst({
+    const user = await prisma.user.findFirstOrThrow({
         where: {
             email
         }
     })
-
-    if (!user) {
-        throw new NotFoundError("User not found")
-    }
 
     const isPasswordCorrect = await prisma.user.comparePassword(password, user.password);
 
