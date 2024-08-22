@@ -1,4 +1,5 @@
 import 'dotenv/config'
+import { setupEmail } from './utils/email';
 
 // Server
 export const PORT = 3000;
@@ -13,3 +14,4 @@ export const SALT_ROUNDS: number = process.env.SALT_ROUNDS ? Number(process.env.
 // Email
 export const SENDER_EMAIL = process.env.SENDER_EMAIL || "";
 export const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD || "";
+export const TRANSPORTER = setupEmail(SENDER_EMAIL, EMAIL_PASSWORD);
