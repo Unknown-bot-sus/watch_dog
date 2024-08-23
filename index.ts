@@ -16,20 +16,20 @@ const server = http.createServer(app);
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(process.cwd(), "public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.route("/").get((req, res) => {
-    res.status(200).sendFile(path.join(__dirname, "/public/index.html"));
+    res.status(200).sendFile(path.join(process.cwd(), "/public/index.html"));
 })
 
 app.route("/clip").get((req, res) => {
-    res.status(200).sendFile(path.join(__dirname, "/public/clip.html"));
+    res.status(200).sendFile(path.join(process.cwd(), "/public/clip.html"));
 })
 
 app.route("/account").get((req, res) => {
-    res.status(200).sendFile(path.join(__dirname, "/public/account.html"));
+    res.status(200).sendFile(path.join(process.cwd(), "/public/account.html"));
 });
 
 
