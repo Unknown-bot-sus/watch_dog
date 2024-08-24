@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Watch Dog</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body class="bg-gray-100">
+        <!-- Header -->
+        <div class="bg-black text-white flex justify-between items-center p-4">
+            <div class="flex items-center space-x-2">
+                <img src="logo.jpeg" alt="Watch Dog Logo" class="w-8 h-8">
+                <span class="text-xl font-bold">WATCH DOG</span>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="/" class="hover:text-gray-400">Cameras</a></li>
+                    <li><a href="/clip" class="hover:text-gray-400">Clips</a></li>
+                    <li><a href="/account" class="hover:text-gray-400">Account</a></li>
+                    <li><a href="#" class="hover:text-gray-400">Alerts</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <main class="container mx-auto py-8">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold">Cameras</h1>
+                <button id="add-btn" class="bg-black text-white font-bold py-2 px-4 rounded">
+                    <!-- + Add Camera -->
+                    <i class="fas fa-plus"></i>
+                    <i class="fa fa-video"></i>
+                </button>
+            </div>
+            <div class="grid grid-cols-4 gap-6" id="cameraGrid">
+            </div>
+        </main>
+
+        <script src="/js/camera.js"></script>
+        <script src="/js/auth.js"></script>
+    </body>
+</html>
