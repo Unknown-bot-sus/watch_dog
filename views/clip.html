@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clips</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <div class="bg-black text-white flex justify-between items-center p-4">
+        <div class="flex items-center space-x-2">
+            <img src="logo.jpeg" alt="Watch Dog Logo" class="w-8 h-8">
+            <span class="text-xl font-bold">WATCH DOG</span>
+        </div>
+        <nav>
+            <ul class="flex space-x-6">
+                <li><a href="/" class="hover:text-gray-400">Cameras</a></li>
+                <li><a href="/clip" class="hover:text-gray-400">Clips</a></li>
+                <li><a href="/account" class="hover:text-gray-400">Account</a></li>
+                <li><a href="#" class="hover:text-gray-400">Alerts</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto py-8">
+        <h1 class="text-2xl font-bold mb-6">Clips</h1>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white shadow-md rounded-lg relative">
+                <thead>
+                    <tr class="bg-gray-200 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">
+                        <th class="px-6 py-3 cursor-pointer relative filter-header">Date</th>
+                        <th class="px-6 py-3 cursor-pointer relative filter-header">Time</th>
+                        <th class="px-6 py-3 cursor-pointer relative filter-header">Camera</th>
+                        <th class="px-6 py-3 cursor-pointer relative filter-header">Intruder</th>
+                        <th class="px-6 py-3"></th> <!-- For the Delete button -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Repeat this block for each clip -->
+                    <tr class="border-b">
+                        <td class="px-6 py-4">01/01/24</td>
+                        <td class="px-6 py-4">12:00PM</td>
+                        <td class="px-6 py-4">Living Room</td>
+                        <td class="px-6 py-4">Cat</td>
+                        <td class="px-6 py-4">
+                            <button onclick="deleteClip(this)" class="text-red-600 hover:text-red-800 font-bold">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Filter Dropdown Template -->
+    <div id="filter-dropdown-template" class="absolute hidden bg-white border border-gray-300 rounded shadow-lg p-4">
+        <input type="text" placeholder="Enter filter value" id="filter-input" class="border p-2 rounded w-full mb-4">
+        <button onclick="applyFilter()" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Apply</button>
+    </div>
+
+    <script>
+        const headers = document.querySelectorAll('.filter-header');
+        const dropdownTemplate = document.getElementById('filter-dropdown-template');
+        let currentColumn;
+        let currentDropdown;
+
+        headers.forEach(header => {
+            header.addEventListener('click', function(event) {
+                event.stopPropagation();
+                currentColumn = this.textContent.trim();
+                closeDropdown();
+
+                // Clone the dropdown template
+                currentDropdown = dropdownTemplate.cloneNode(true);
+                currentDropdown.removeAttribute('id');
+                currentDropdown.classList.remove('hidden');
+
+                // Position the dropdown relative to the clicked header
+                this.appendChild(currentDropdown);
+
+                // Add event listeners for closing the dropdown
+                document.addEventListener('click', closeDropdown);
+            });
+        });
+
+        function closeDropdown() {
+            if (currentDropdown) {
+                currentDropdown.remove();
+                currentDropdown = null;
+                document.removeEventListener('click', closeDropdown);
+            }
+        }
+
+        function applyFilter() {
+            const filterValue = currentDropdown.querySelector('#filter-input').value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const cell = row.querySelector(`td:nth-child(${[...headers].indexOf(document.querySelector(`th:contains(${currentColumn})`)) + 1})`);
+                if (cell && cell.textContent.toLowerCase().includes(filterValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            closeDropdown();
+        }
+
+        function deleteClip(element) {
+            let confirmDelete = confirm("Are you sure you want to delete this clip?");
+            if (confirmDelete) {
+                // Remove the clip row
+                element.closest('tr').remove();
+            }
+        }
+    </script>
+    <script src="/js/clip.js"></script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>
