@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-99FnFCk5hT5w/ZlbI5IGZKkkJ4In1cLZbA9tm9NqSL1Rq+uj0Vz6SG4E8E0+meSg9pP1tW0oAULvTuUbPFB6rg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <div class="bg-black text-white flex justify-between items-center p-4">
+        <div class="flex items-center space-x-2">
+            <img src="logo.jpeg" alt="Watch Dog Logo" class="w-8 h-8">
+            <span class="text-xl font-bold">WATCH DOG</span>
+        </div>
+        <nav>
+            <ul class="flex space-x-6">
+                <li><a href="/" class="hover:text-gray-400">Cameras</a></li>
+                <li><a href="/clip" class="hover:text-gray-400">Clips</a></li>
+                <li><a href="/account" class="hover:text-gray-400">Account</a></li>
+                <li><a href="#" class="hover:text-gray-400">Alerts</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto py-8">
+        <h1 class="text-2xl font-bold mb-6">Account</h1>
+        <div class="bg-gray-200 rounded-lg">
+            <!-- Change Email -->
+            <div class="flex items-center p-4 border-b border-gray-300">
+                <i class="fas fa-envelope mr-4"></i>
+                <span>Change Email</span>
+            </div>
+            <!-- Change Password -->
+            <div class="flex items-center p-4 border-b border-gray-300">
+                <i class="fas fa-key mr-4"></i>
+                <span>Change Password</span>
+            </div>
+            <!-- Delete Account -->
+            <div class="flex items-center p-4">
+                <i class="fas fa-times mr-4"></i>
+                <span>Delete Account</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/auth.js"></script>
+</body>
+</html>
