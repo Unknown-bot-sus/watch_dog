@@ -27,7 +27,7 @@ app.use("/", viewRouter);
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
-app.use("/api/v1/device", deviceRouter);
+app.use("/api/v1/devices", deviceRouter);
 app.use("/api/v1/detections", detectionsRouter);
 
 app.use(notFound);
