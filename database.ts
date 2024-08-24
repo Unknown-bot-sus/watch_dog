@@ -9,6 +9,13 @@ export const prisma = new PrismaClient().$extends({
             async create({ args, query}) {
                 args.data.password = await hashMessage(args.data.password);
                 return query(args)
+            },
+
+            async update({ args, query }) {
+                if (args.data.password !== undefined && typeof args.data.password === "string") {
+                    args.data.password = await hashMessage(args.data.password);
+                }
+                return query(args)
             }
         }
     },
