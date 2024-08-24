@@ -5,11 +5,13 @@ export const router = Router();
 
 function serveHtml(file: string) {
     return (req: Request, res: Response) => {
-        res.status(200).sendFile(file);
+        res.status(200).sendFile(path.join(process.cwd(), "/views", file));
     }
 }
 
-router.get("/", serveHtml(path.join(process.cwd(), "/public/index.html")));
-router.get("/account", serveHtml(path.join(process.cwd(), "/public/account.html")));
-router.get("/detection", serveHtml(path.join(process.cwd(), "/public/detection.html")));
-router.get('/clip', serveHtml(path.join(process.cwd(), "/public/clip.html")));
+router.get("/", serveHtml("index.html"));
+router.get("/account", serveHtml("account.html"));
+router.get("/detection", serveHtml("detection.html"));
+router.get("/clip", serveHtml("clip.html"));
+router.get("/login", serveHtml("login.html"));
+router.get("/signup", serveHtml("signup.html"));
