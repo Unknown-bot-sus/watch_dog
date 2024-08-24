@@ -36,7 +36,8 @@ async function createCamera(userId, name) {
             throw new Error('Network response was not ok');
         }
         const body = await res.json();
-        const cameraCard = createCameraCard(body.id, body.name, body.imageUrl);
+        const device = body.device;
+        const cameraCard = createCameraCard(device.id, device.name, device.imageUrl);
         cameraGrid.appendChild(cameraCard);
     } catch (error) {
         console.error('Failed to create camera:', error);
