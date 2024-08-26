@@ -25,7 +25,16 @@ export const createDetection = async (req: Request, res: Response) => {
 export const getDetections = async (req: Request, res: Response) => {
     const detections = await prisma.detection.findMany({
         where: {
-            deviceId: Number(req.query.deviceId)
+            device: {
+                userId: Number(req.query.userId)
+            }
+        },
+        include: {
+            device: {
+                select: {
+                    name: true
+                }
+            }
         }
     })
 
@@ -37,7 +46,7 @@ export const getDetections = async (req: Request, res: Response) => {
 export const deleteDetection = async (req: Request, res: Response) => {
     await prisma.detection.delete({
         where: {
-            id: Number(req.query.id)
+            id: Number(req.params.id)
         }
     })
 
