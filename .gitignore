@@ -11,6 +11,9 @@ prisma/migrations
 # videos
 **/*.mp4
 
+# tailwind css
+/public/css/style.css
+
 # fontawesome
 /public/fontawesome
 
