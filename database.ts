@@ -25,9 +25,9 @@ export const prisma = new PrismaClient().$extends({
                 return await compareHash(password, hashedPassword);
             },
 
-            async createJWT(id: number) {
+            async createJWT(id: number, email: string) {
                 return sign(
-                    {id},
+                    {id, email},
                     JWT_SECRET,
                     {expiresIn: JWT_LIFETIME}
                 )
