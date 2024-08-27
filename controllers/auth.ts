@@ -21,7 +21,7 @@ export const login = async (req: Request, res: Response) => {
         throw new UnAuthenticatedError("Invalid credentials");
     }
 
-    const token = await prisma.user.createJWT(user.id);
+    const token = await prisma.user.createJWT(user.id, user.email);
     const { password: _, ...jsonUser} = user;
     res.status(StatusCodes.OK).send({
         user: jsonUser,
