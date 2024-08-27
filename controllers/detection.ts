@@ -1,7 +1,9 @@
-import { Request, Response } from "express"
-import { prisma } from "../database"
-import { StatusCodes } from "http-status-codes"
-import { unlink } from "fs/promises"
+import { Request, Response } from "express";
+import { prisma } from "../database";
+import { StatusCodes } from "http-status-codes";
+import { unlink } from "fs/promises";
+import { sendEmail } from "../utils/email";
+import { SENDER_EMAIL, TRANSPORTER } from "../constant";
 
 export const createDetection = async (req: Request, res: Response) => {
     try {
@@ -12,6 +14,8 @@ export const createDetection = async (req: Request, res: Response) => {
                 deviceId: Number(req.body.deviceId)
             }
         })
+
+        await sendEmail(TRANSPORTER, SENDER_EMAIL, "", "Subject", detection.description);
 
         res.status(StatusCodes.CREATED).send({
             detection
