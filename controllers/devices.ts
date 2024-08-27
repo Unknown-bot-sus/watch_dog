@@ -1,11 +1,12 @@
 import { Request, Response } from "express"
 import { prisma } from "../database"
 import { StatusCodes } from "http-status-codes";
+import { UnAuthorizedError } from "../errors";
 
 export const getDevice = async (req: Request, res: Response) => {
     const device = await prisma.device.findFirstOrThrow({
         where: {
-            userId: Number(req.params.id)
+            id: Number(req.params.id)
         }
     });
 
@@ -15,6 +16,10 @@ export const getDevice = async (req: Request, res: Response) => {
 }
 
 export const getDevices = async (req: Request, res: Response) => {
+    if (res.locals.user.id !== Number(req.query.userId)) {
+        throw new UnAuthorizedError("You are not authorized to view this resource")
+    }
+    
     const devices = await prisma.device.findMany({
         where: {
             userId: Number(req.query.userId)
