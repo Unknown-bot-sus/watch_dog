@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { JsonWebTokenError, verify } from "jsonwebtoken";
+import { JsonWebTokenError, JwtPayload, verify } from "jsonwebtoken";
 import { UnAuthenticatedError } from "../errors";
 import { JWT_SECRET } from "../constant";
 
@@ -13,7 +13,8 @@ export async function auth(req: Request, res: Response, next: NextFunction) {
   const [, token] = authHeaders.split(" ");
 
   try {
-    verify(token, JWT_SECRET);
+    const decoded = verify(token, JWT_SECRET) as JwtPayload;
+    res.locals.user = decoded;
     next();
   } catch (e: unknown) {
     if (e instanceof JsonWebTokenError)
