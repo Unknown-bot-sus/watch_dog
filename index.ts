@@ -10,6 +10,8 @@ import { router as detectionsRouter } from "./routes/detection";
 import { router as viewRouter } from "./routes/views";
 import { router as userRouter } from "./routes/user";
 
+import { auth } from "./middleware/auth";
+
 import { PORT } from "./constant";
 import { errorHandler } from "./middleware/errorHandler";
 import { notFound } from "./middleware/notFound";
@@ -24,8 +26,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use("/", viewRouter);
-
 app.use("/api/v1/auth", authRouter);
+
+app.use(auth)
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/devices", deviceRouter);
 app.use("/api/v1/detections", detectionsRouter);
