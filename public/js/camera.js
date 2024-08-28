@@ -3,13 +3,13 @@ const addBtn = document.getElementById("add-btn");
 addBtn.addEventListener('click', addCamera);
 
 const user = JSON.parse(window.localStorage.getItem('user'));
+const headers = {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`};
 getCameras(user.id);
 
-const headers = {'Content-Type': 'application/json'};
 
 async function getCameras(userId) {
     try {
-        const res = await fetch(`/api/v1/devices?userId=${userId}`);
+        const res = await fetch(`/api/v1/devices?userId=${userId}`, { headers });
         if (!res.ok) {
             throw new Error('Network response was not ok');
         }
@@ -109,6 +109,7 @@ async function deleteCamera(id, element) {
     if (confirmDelete) {
         const res = await fetch(`/api/v1/devices/${id}`, {
             method: 'DELETE',
+            headers,
         });
 
         if (!res.ok) {

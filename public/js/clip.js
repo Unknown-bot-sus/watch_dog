@@ -1,10 +1,12 @@
 const clipContainer = document.getElementById('clip-container');
 const user = JSON.parse(window.localStorage.getItem('user'));
+const headers = {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`};
+
 fetchClips(user.id);
 
 async function fetchClips(userId) {
     try {
-        const res = await fetch(`/api/v1/detections?userId=${userId}`);
+        const res = await fetch(`/api/v1/detections?userId=${userId}`, { headers });
         if (!res.ok) {
             throw new Error('Network response was not ok');
         }
@@ -67,6 +69,7 @@ async function deleteClip(id, element) {
     if (confirmDelete) {
         const res = await fetch(`/api/v1/detections/${id}`, {
             method: 'DELETE',
+            headers,
         });
 
         if (!res.ok) {

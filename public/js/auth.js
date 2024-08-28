@@ -8,5 +8,6 @@ function redirectIfNotAuthenticated() {
     }
 }
 
+const token = localStorage.getItem('token');
 
 redirectIfNotAuthenticated();
