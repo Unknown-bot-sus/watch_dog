@@ -3,6 +3,7 @@ import { Request } from "express"
 import path from "path";
 import { createUniqueId } from "../utils/idCreater";
 import { BadRequestError } from "../errors";
+import { VIDEO_SIZE_LIMIT } from "../constant";
 
 // Set up the storage destination and file naming convention
 const storage = multer.diskStorage({
@@ -28,5 +29,6 @@ const fileFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallb
 
 export const upload = multer({
   storage,
-  fileFilter
+  fileFilter,
+  limits: { fileSize: VIDEO_SIZE_LIMIT } // Set file size limit to 10MB
 });

@@ -2,7 +2,13 @@ import 'dotenv/config'
 import { setupEmail } from './utils/email';
 
 // Server
-export const PORT = 3000;
+export const PORT: number = parseInt(process.env.PORT || "3000");   // default 3000
+
+// video
+// const MIME_TYPES = ["image/jpg", "image/png", "image/jpeg"];
+// default 5mb
+export const VIDEO_SIZE_LIMIT: number =
+  parseInt(process.env.VIDEO_SIZE_LIMIT || (5 * 1024 * 1024).toString()); ;
 
 // JWT
 export const JWT_SECRET = process.env.JWT_SECRET || "test";
