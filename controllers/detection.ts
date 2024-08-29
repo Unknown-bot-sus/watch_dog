@@ -15,7 +15,7 @@ export const createDetection = async (req: Request, res: Response) => {
             }
         })
 
-        await sendEmail(TRANSPORTER, SENDER_EMAIL, "", "Subject", detection.description);
+        await sendEmail(TRANSPORTER, SENDER_EMAIL, res.locals.user.email, "Subject", detection.description);
 
         res.status(StatusCodes.CREATED).send({
             detection
