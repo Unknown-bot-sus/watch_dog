@@ -1,6 +1,7 @@
 const video = document.getElementById('webcam');
 const liveView = document.getElementById('liveView');
 const demosSection = document.getElementById('demos');
+const statusEl = document.getElementById('status');
 const enableWebcamButton = document.getElementById('webcamButton');
 let mediaRecorder = null;
 let recordedChunks = [];
@@ -91,6 +92,7 @@ let model = undefined;
 
 cocoSsd.load().then(function (loadedModel) {
   console.log("Model loaded.");
+  statusEl.textContent = 'Click "Enable Webcam" to start';
   model = loadedModel;
   // Show demo section now model is ready to use.
   demosSection.classList.remove('opacity-20');

@@ -4,18 +4,14 @@
     <title>Multiple object detection using pre trained model in TensorFlow.js</title>
     <meta charset="utf-8">
     <!-- Import Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
   </head>  
   <body class="font-sans text-gray-800 m-8">
 
-    <h1 class="italic text-orange-600 text-3xl">Multiple object detection using pre trained model in TensorFlow.js</h1>
+    <h1 id="status" class="italic text-orange-600 text-3xl">Wait for the model to finsih loading</h1>
 
-    <p class="mt-4">Wait for the model to load before clicking the button to enable the webcam - at which point it will become visible to use.</p>
     
-    <section id="demos" class="opacity-20 transition-opacity duration-500 ease-in-out mt-8">
-
-      <p>Hold some objects up close to your webcam to get a real-time classification! When ready, click "enable webcam" below and accept access to the webcam when the browser asks (check the top left of your window).</p>
-      
+    <section id="demos" class="opacity-20 transition-opacity duration-500 ease-in-out mt-8">      
       <div id="liveView" class="relative float-left w-[calc(100%-20px)] m-2 cursor-pointer">
         <button id="webcamButton" class="px-4 py-2 bg-blue-500 text-white rounded">Enable Webcam</button>
         <video id="webcam" autoplay muted width="640" height="480" class="block mt-4"></video>
