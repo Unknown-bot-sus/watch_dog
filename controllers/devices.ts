@@ -43,16 +43,16 @@ export const createDevice = async (req: Request, res: Response) => {
 
 export const deleteDevice = async (req: Request, res: Response) => {
     await prisma.$transaction([
+        prisma.detection.deleteMany({
+            where: {
+                deviceId: Number(req.params.id)
+            }
+        }),
         prisma.device.delete({
             where: {
                 id: Number(req.params.id)
             }
         }),
-        prisma.detection.deleteMany({
-            where: {
-                deviceId: Number(req.params.id)
-            }
-        })
     ])
     
 

@@ -47,10 +47,12 @@ async function createCamera(userId, name) {
 
 function createCameraCard(id, cameraName, imageUrl = './image.svg') {
     // Create the main card container
-    const card = document.createElement('a');
+    const card = document.createElement('div');
     card.className = 'bg-white shadow rounded-lg text-center w-64 pb-5';
     card.id = id;
-    card.href = `/detection?cameraId=${id}`;
+    card.addEventListener('click', () => {
+        window.location.href = `/detection?cameraId=${id}`;
+    })
 
     // Create the image element
     const img = document.createElement('img');
@@ -70,13 +72,19 @@ function createCameraCard(id, cameraName, imageUrl = './image.svg') {
     const renameButton = document.createElement('button');
     renameButton.className = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded';
     renameButton.textContent = 'Rename';
-    renameButton.addEventListener('click', () => renameCamera(id, card));
+    renameButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        renameCamera(id, card)
+    });
 
     // Create the delete button
     const deleteButton = document.createElement('button');
     deleteButton.className = 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded';
     deleteButton.textContent = 'Delete';
-    deleteButton.addEventListener('click', () => deleteCamera(id, card));
+    deleteButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        deleteCamera(id, card)
+    });
 
     // Append buttons to the button container
     buttonContainer.appendChild(renameButton);
