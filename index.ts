@@ -22,6 +22,8 @@ const server = http.createServer(app);
 app.use(cors());
 
 app.use(express.static(path.join(process.cwd(), "public")));
+app.use('/videos', express.static(path.join(process.cwd(), "videos")));
+
 app.use(express.urlencoded({ extended: false, limit: "50mb" }));
 app.use(express.json({limit: "50mb"}));
 

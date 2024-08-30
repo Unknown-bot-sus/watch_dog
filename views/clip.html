@@ -6,8 +6,9 @@
     <title>Clips</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="/css/style.css" rel="stylesheet">
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 relative">
 
     <!-- Header -->
     <div class="bg-black text-white flex justify-between items-center p-4">
@@ -40,11 +41,34 @@
                     </tr>
                 </thead>
                 <tbody id="clip-container">
-                   
+                    <!-- Clips will be added here -->
                 </tbody>
             </table>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div id="video-modal" class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 bg-opacity-75 flex items-center justify-center hidden">
+        <div class="bg-white py-4 px-6 rounded-lg relative">
+            <button id="close-modal" class="absolute top-2 right-1 text-red-600"><i class="fa-regular fa-circle-xmark"></i></button>
+            <video
+                id="my-video"
+                class="video-js"
+                controls
+                preload="auto"
+                width="640"
+                height="264"
+                data-setup="{}"
+            >
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that
+                    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
+        </div>
+    </div>
+
     <script src="/js/auth.js"></script>
     <script src="/js/clip.js"></script>
 </body>

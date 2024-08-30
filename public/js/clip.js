@@ -1,8 +1,18 @@
 const clipContainer = document.getElementById('clip-container');
 const user = JSON.parse(window.localStorage.getItem('user'));
+const modal = document.getElementById('video-modal');
+const closeModal = document.getElementById('close-modal');
+const video = document.getElementById('my-video');
+
 const headers = {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`};
 
 fetchClips(user.id);
+
+closeModal.addEventListener('click', () => {
+    const video = document.getElementById('video');
+    video?.remove();
+    modal.classList.add('hidden');
+});
 
 async function fetchClips(userId) {
     try {
@@ -15,6 +25,15 @@ async function fetchClips(userId) {
         for (let clip of body.detections) {
                 const { date, time } = getDateAndTime(new Date(clip.createdAt));
                 const clipRow = createClipRow(clip.id, date, time, clip.device.name, clip.description);
+                clipRow.addEventListener('click', () => {
+                    modal.classList.remove('hidden');
+                    const sourceTag = document.createElement('source');
+                    sourceTag.setAttribute('src', clip.video);
+                    sourceTag.setAttribute('type', 'video/mp4');
+                    video.appendChild(sourceTag);
+                    sourceTag.setAttribute('id', 'video');
+                })
+
                 clipContainer.appendChild(clipRow);
         }
     } catch (error) {
