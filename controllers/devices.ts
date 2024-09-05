@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import { prisma } from "../database"
 import { StatusCodes } from "http-status-codes";
 import { UnAuthorizedError } from "../errors";
+import { unlink } from "fs/promises"
 
 export const getDevice = async (req: Request, res: Response) => {
     const device = await prisma.device.findFirstOrThrow({
@@ -42,7 +43,12 @@ export const createDevice = async (req: Request, res: Response) => {
 }
 
 export const deleteDevice = async (req: Request, res: Response) => {
-    await prisma.$transaction([
+    const [detections] = await prisma.$transaction([
+        prisma.detection.findMany({
+            where: {
+                deviceId: Number(req.params.id)
+            }
+        }),
         prisma.detection.deleteMany({
             where: {
                 deviceId: Number(req.params.id)
@@ -55,6 +61,9 @@ export const deleteDevice = async (req: Request, res: Response) => {
         }),
     ])
     
+    for (let i = 0; i < detections.length; i++) {  
+        unlink(detections[i].video);
+    }
 
     res.status(StatusCodes.NO_CONTENT).send()
 }
