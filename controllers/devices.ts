@@ -47,6 +47,9 @@ export const deleteDevice = async (req: Request, res: Response) => {
         prisma.detection.findMany({
             where: {
                 deviceId: Number(req.params.id)
+            },
+            select: {
+                video: true
             }
         }),
         prisma.detection.deleteMany({

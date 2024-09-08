@@ -31,7 +31,7 @@ export const getDetections = async (req: Request, res: Response) => {
         where: {
             device: {
                 userId: Number(req.query.userId)
-            }
+            },
         },
         include: {
             device: {

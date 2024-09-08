@@ -12,7 +12,6 @@ function serveHtml(file: string) {
 router.get("/", serveHtml("index.html"));
 router.get("/account", serveHtml("account.html"));
 router.get("/detection", serveHtml("detection.html"));
-router.get("/clip", serveHtml("clip.html"));
+router.get("/clips", serveHtml("clip.html"));
 router.get("/login", serveHtml("login.html"));
 router.get("/signup", serveHtml("signup.html"));
-router.get("/detection", serveHtml("detection.html"));
