@@ -126,19 +126,25 @@ In the terminal
    EMAIL_PASSWORD='************'
    ```
 
-4. Build the project
+4. Create db
+
+   ```bash
+   npx prisma migrate dev
+   ```
+
+5. Build the project
 
    ```bash
    npm run build
    ```
 
-5. Start the project
+6. Start the project
 
    ```bash
    npm run start
    ```
 
-6. Open the web dashboard: Navigate to http://localhost:3000 in your browser.
+7. Open the web dashboard: Navigate to http://localhost:3000 in your browser.
 
 ---
 
