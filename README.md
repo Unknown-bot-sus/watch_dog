@@ -88,10 +88,15 @@ The Watch Dog system consists of three major components:
 
 ### Prerequisites
 
-- Node.js (v14.x or later)
-- fmpeg
+- Node.js (v14.x or later) https://nodejs.org/en/download/package-manager/current
+- fmpeg https://www.ffmpeg.org/download.html
+- git https://git-scm.com/
 
 ### Steps
+
+Get app password from gmail https://myaccount.google.com/apppasswords
+
+In the terminal
 
 1. Clone the repository:
 
@@ -109,6 +114,8 @@ The Watch Dog system consists of three major components:
 3. Configure the environment variables
 
    Create .env file in the root folder with the following variables
+
+   Add email address and app password from above
 
    ```bash
    # Database
@@ -150,6 +157,7 @@ The Watch Dog system consists of three major components:
 - Performance on Low-End Devices: Due to COCO-SSD's real-time processing, devices with low computational power may experience lag.
 - Video Upload Size: Large video files may take longer to upload, especially on slower networks.
 - Browser Compatibility: Some browsers may not fully support the Media Recorder API.
+- Cannot access via mobile: Try to follow the steps given here https://stackoverflow.com/questions/4779963/how-can-i-access-my-localhost-from-my-android-device
 
 ---
 
