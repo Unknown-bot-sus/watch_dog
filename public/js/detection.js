@@ -8,6 +8,7 @@ let recordedChunks = [];
 const headers = {'Authorization': `Bearer ${token}`};
 const params = new URLSearchParams(window.location.search);
 const cameraId = params.get('cameraId');
+let desc = '';
 
 // Check if webcam access is supported.
 function getUserMediaSupported() {
@@ -77,7 +78,7 @@ async function submit(blob) {
     const formData = new FormData();
     formData.append('video', blob, 'clip.webm');
     formData.append("deviceId", cameraId);
-    formData.append("description", "helloworld");
+    formData.append("description", desc);
 
     const res = await fetch('/api/v1/detections', {
         method: 'POST',
@@ -100,7 +101,7 @@ cocoSsd.load().then(function (loadedModel) {
 
 
 let children = [];
-const relevantClasses = ['person', 'cat', 'dog'];
+const relevantClasses = ['person', 'cat', 'dog', 'bird'];
 let startTime = null;
 let endTime = null;
 
@@ -142,6 +143,18 @@ function predictWebcam() {
         liveView.appendChild(p);
         children.push(highlighter);
         children.push(p);
+
+        // Determine position (left or right)
+        const position = predictions[n].bbox[0] + predictions[n].bbox[2] / 2 < video.width / 2 ? 'left' : 'right';
+
+        // Add description for size of the intruder
+        const size = predictions[n].bbox[2] * predictions[n].bbox[3] > 50000 ? 'big' : 'small';
+
+        desc = `Detected: ${predictions[n].class} 
+        - Confidence: ${Math.round(parseFloat(predictions[n].score) * 100)}%
+        - Position: ${position} side of the frame
+        - Type: ${predictions[n].class}
+        - Size: ${size} intruder`;
       }
     }
 
