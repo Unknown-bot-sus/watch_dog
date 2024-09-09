@@ -148,12 +148,15 @@ function predictWebcam() {
     if (startTime === null && validPred.length > 0) {
         console.log('start recording');
         startRecording();
+    } else {
+      const timeDiff = Date.now() - startTime;
+      if (startTime !== null && ((validPred.length === 0 && timeDiff > 2000) || timeDiff > 19000)) {
+          console.log('end recording');
+          stopRecording();
+      }
     }
 
-    if (startTime !== null && (Date.now() - startTime) > 19000) {
-        console.log('end recording');
-        stopRecording();
-    }
+    
     
     // Call this function again to keep predicting when the browser is ready.
     window.requestAnimationFrame(predictWebcam);
