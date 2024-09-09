@@ -76,7 +76,11 @@ function createClipRow(id, date, time, location, description) {
     const button = document.createElement('button');
     button.className = 'text-red-600 hover:text-red-800 font-bold';
     button.textContent = 'Delete';
-    button.addEventListener('click', () => deleteClip(id, tr));
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        deleteClip(id, tr)
+    });
     buttonTd.appendChild(button);
     tr.appendChild(buttonTd);
 

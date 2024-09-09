@@ -52,11 +52,13 @@ export const getDetections = async (req: Request, res: Response) => {
 }
 
 export const deleteDetection = async (req: Request, res: Response) => {
-    await prisma.detection.delete({
+    const detection = await prisma.detection.delete({
         where: {
             id: Number(req.params.id)
-        }
+        },
     })
+
+    await unlink(detection.video)
 
     res.status(StatusCodes.NO_CONTENT).send();
 }
