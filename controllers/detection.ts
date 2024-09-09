@@ -15,7 +15,11 @@ export const createDetection = async (req: Request, res: Response) => {
             }
         })
 
-        await sendEmail(TRANSPORTER, SENDER_EMAIL, res.locals.user.email, "Subject", detection.description);
+        const videourl = req.protocol + '://' + req.get('host') + '/' + detection.video.replace('\\', '/');
+        const description = `${detection.description}
+Please check the video at the following link: ${videourl}
+`
+        await sendEmail(TRANSPORTER, SENDER_EMAIL, res.locals.user.email, "Subject", description);
 
         res.status(StatusCodes.CREATED).send({
             detection
