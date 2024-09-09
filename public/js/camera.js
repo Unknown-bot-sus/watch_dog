@@ -50,7 +50,7 @@ function createCameraCard(id, cameraName, imageUrl = './image.svg') {
     const card = document.createElement('a');
     card.className = 'bg-white shadow rounded-lg text-center w-64 pb-5';
     card.id = id;
-    card.href = `/detection?cameraId=${id}`;
+    card.href = `/detection?cameraId=${id}&name=${cameraName}`;
 
     // Create the image element
     const img = document.createElement('img');

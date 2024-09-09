@@ -8,6 +8,7 @@ let recordedChunks = [];
 const headers = {'Authorization': `Bearer ${token}`};
 const params = new URLSearchParams(window.location.search);
 const cameraId = params.get('cameraId');
+const cameraName = params.get('name');
 let desc = '';
 
 // Check if webcam access is supported.
@@ -151,10 +152,11 @@ function predictWebcam() {
         const size = predictions[n].bbox[2] * predictions[n].bbox[3] > 50000 ? 'big' : 'small';
 
         desc = `Detected: ${predictions[n].class} 
-        - Confidence: ${Math.round(parseFloat(predictions[n].score) * 100)}%
-        - Position: ${position} side of the frame
-        - Type: ${predictions[n].class}
-        - Size: ${size} intruder`;
+- Confidence: ${Math.round(parseFloat(predictions[n].score) * 100)}%
+- Position: ${position} side of the frame
+- Type: ${predictions[n].class}
+- Place: ${cameraName}
+- Size: ${size} intruder`;
       }
     }
 
