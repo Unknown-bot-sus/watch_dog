@@ -1,5 +1,8 @@
 const logoutButton = document.getElementById('logout-button');
-logoutButton.addEventListener('click', logout);
+
+if (logoutButton) {
+    logoutButton.addEventListener('click', logout);
+}
 
 function logout() {
     localStorage.removeItem('token');
