@@ -1,3 +1,11 @@
+const logoutButton = document.getElementById('logout-button');
+logoutButton.addEventListener('click', logout);
+
+function logout() {
+    localStorage.removeItem('token');
+    window.location.reload();
+}
+
 function isAuthenticated() {
     return localStorage.getItem('token') !== null;
 }
